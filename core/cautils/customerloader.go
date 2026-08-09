@@ -349,7 +349,6 @@ func loadConfigFromData(co *ConfigObj, data map[string]string) error {
 	return nil
 }
 
-
 func existsConfigFile() bool {
 	_, err := os.ReadFile(ConfigFileFullPath())
 	return err == nil

@@ -191,9 +191,9 @@ func TestLoadConfigFromData_CorruptedConfigJsonReturnsError(t *testing.T) {
 // both "config.json" and individual flat keys exist in the data map, the flat keys
 // always win (they are applied second, on top of the config.json base).
 func TestLoadConfigFromData_FlatKeysTakePrecedenceOverConfigJson(t *testing.T) {
-	base := &ConfigObj{
-		AccountID:   "base-account",
-		CloudAPIURL: "https://base-api.example.com",
+	base := map[string]string{
+		"accountID":   "base-account",
+		"cloudAPIURL": "https://base-api.example.com",
 	}
 	baseJSON, err := json.Marshal(base)
 	require.NoError(t, err)
@@ -210,8 +210,6 @@ func TestLoadConfigFromData_FlatKeysTakePrecedenceOverConfigJson(t *testing.T) {
 	// Fields only in config.json (not overridden) should still be populated.
 	assert.Equal(t, "https://base-api.example.com", co.CloudAPIURL)
 }
-
-
 
 func TestAdoptClusterName(t *testing.T) {
 	tests := []struct {
